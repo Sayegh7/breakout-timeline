@@ -1,23 +1,23 @@
 {
-  "name": "breakout-timeline",
-  "version": "0.0.4",
-  "description": "",
-  "main": "./lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "breakout-timeline": "bin/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Sayegh7/breakout-timeline"
-  },
-  "preferGlobal": "true",
-  "author": "Ahmed El Sayegh",
-  "license": "ISC",
-  "dependencies": {
-    "home-dir": "^1.0.0",
-    "nedb": "^1.8.0"
-  }
+    "name": "breakout-timeline",
+    "version": "0.0.4",
+    "description": "",
+    "main": "./lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "breakout-timeline": "bin/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sayegh7/breakout-timeline"
+    },
+    "preferGlobal": "true",
+    "author": "Ahmed El Sayegh",
+    "license": "ISC",
+    "dependencies": {
+        "home-dir": "^1.0.0",
+        "nedb": "^1.8.0"
+    }
 }
