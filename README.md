@@ -2,7 +2,7 @@
 
 
 [![npm
-version](https://badge.fury.io/js/breakout-timeline.svg)](https://badge.fury.io/js/ng-form-generator)
+version](https://badge.fury.io/js/breakout-timeline.svg)](https://badge.fury.io/js/breakout-timeline)
 
 A small time logging tool that uses NeDB to save the log locally
 
