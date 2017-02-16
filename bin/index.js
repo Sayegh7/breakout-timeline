@@ -44,7 +44,7 @@ switch (process.argv[2]) {
 
     db.find({ project_name: process.argv[5]}, function (err, docs) {
       if(err) throw err;
-      if(!docs) return console.log("Project or feature not found");
+      if(!docs || docs.length === 0) return console.log("Project or feature not found");
       var project = docs[0];
       var index = 0;
       for (var i = 0; i < project.features.length; i++) {
@@ -69,7 +69,7 @@ switch (process.argv[2]) {
     case '-rf':
     db.find({ project_name: process.argv[5]}, function (err, docs) {
       if(err) throw err;
-      if(!docs) return console.log("Project or feature not found");
+      if(!docs || docs.length === 0) return console.log("Project or feature not found");
       var project = docs[0];
       var index = 0;
       for (var i = 0; i < project.features.length; i++) {
@@ -94,7 +94,7 @@ switch (process.argv[2]) {
     case '-lf':
     db.find({ project_name: process.argv[5]}, function (err, docs) {
       if(err) throw err;
-      if(!docs) return console.log("Project or feature not found");
+      if(!docs || docs.length === 0) return console.log("Project or feature not found");
       var project = docs[0];
       var index = 0;
       for (var i = 0; i < project.features.length; i++) {
@@ -102,6 +102,11 @@ switch (process.argv[2]) {
           index = i;
           break;
         }
+      }
+      var feature = project.features[index];
+      var lastEntry = feature[Object.keys(feature)[Object.keys(feature).length - 1]];
+      if(lastEntry === "Paused"){
+        return console.log("Cannot log while paused, please resume first");
       }
       if(process.argv[6] !== "-m"){
         return console.log("You should add your message with a '-m' flag");
