@@ -37,3 +37,9 @@ Log a message related to a feature in an existing project
 ```sh
 $ breakout-timeline -lf <feature-name> -p <project-name> -m <message>
 ```
+
+Spits out the project timeline in a json file placed in the home directory
+`~/breakout-timeline.json`
+```sh
+$ breakout-timeline log <project-name>
+```

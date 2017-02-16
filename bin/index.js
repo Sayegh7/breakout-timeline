@@ -2,10 +2,11 @@
 
 // var lib = require('../lib/index.js');
 // var utils = lib.storage;
-
+var fs = require('fs');
+var homeDir = require('home-dir');
 var Datastore = require('nedb'),
     db = new Datastore({
-        filename: './db/database.db',
+        filename: homeDir('/breakout-timeline.db'),
         autoload: true
     });
 switch (process.argv[2]) {
@@ -22,7 +23,7 @@ switch (process.argv[2]) {
         break;
     case '-nf':
 
-        db.update({ project_name: process.argv[5]}, { $push: { features: {feature_name: process.argv[3]} } }, {}, function (err, docs) {
+        db.update({ project_name: process.argv[5]}, { $addToSet: { features: {feature_name: process.argv[3]} } }, {upsert: true}, function (err, docs) {
           if(err) throw err;
           if(docs === 0) return console.log("Project or feature do not exist");
           console.log("Feature Added");
@@ -30,7 +31,7 @@ switch (process.argv[2]) {
         break;
 
     case '-xf':
-    db.update({ project_name: process.argv[5]}, { $pop: { features: {feature_name: process.argv[3]} } }, {}, function (err, docs) {
+    db.update({ project_name: process.argv[5]}, { $pull: { features: {feature_name: process.argv[3]} } }, {}, function (err, docs) {
       if(err) throw err;
       if(docs === 0) return console.log("Project or feature do not exist");
       console.log("Feature Removed");
@@ -112,6 +113,18 @@ switch (process.argv[2]) {
       })
     });
         break;
+    case 'log':
+      db.find({project_name: process.argv[3]}, function (err, docs) {
+        if(err) throw err;
+        if(!docs || docs.length === 0) return console.log("Project or feature not found");
+        var project = docs[0];
+        fs.writeFile(homeDir('/breakout-timeline.json'), JSON.stringify(project), function (err) {
+          if (err) return console.log(err);
+          console.log('Data written to breakout-timeline.json');
+        });
+
+      })
+      break;
 
     default:
         console.log("Invalid flag");
